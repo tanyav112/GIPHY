@@ -2,14 +2,33 @@ var books = [
   "Pride and Prejudice", "Odyssey", "The Great Gatsby", "Hamlet", "Da Vinci Code", "Life of Pi", "The Help", "To Kill a Mockingird", "The Lord of the Rings", "The Handmaid's Tale"
 ];
 
+//Function for dumping JSON data for each button into the div
+function displayBookInfo() {
+
+  let book = $(this).attr("data-name");
+  let url = "https://api.giphy.com/v1/gifs/search?q=" + book + "&api_key=N50meNbSPQG2tP5ukDhve3Q1BjLaakTT&limit=10";
+  
+ 
+  $.get(url)
+    .then(function (r) {
+      console.log(r)
+      $("#book-view").text(JSON.stringify(r));
+
+    })
+    .catch(function (e) {
+      console.log(e)
+    });
+  }
+
+
 //Function to capture the book name from the data-attribute
-function alertBookName(){
-  var bookName = $(this).attr("data-name");
-}
+// function alertBookName(){
+//   var bookName = $(this).attr("data-name");
+// }
 
 
 // Function for displaying book data
-    function addButtons() {
+  function addButtons() {
 //to prevent repeat buttons
    $("#book-view").empty();
 // Looping through the array of books
@@ -27,18 +46,6 @@ function alertBookName(){
   }
 }  
 
-//URL to GIPHY
-let url = "http://api.giphy.com/v1/gifs/search?q=" + books + "&api_key=N50meNbSPQG2tP5ukDhve3Q1BjLaakTT&limit=10";
-
-$.get(url)
-  .then(function (r) {
-    console.log(r)
-    // $("#book-view").text(r);
-
-  })
-  .catch(function (e) {
-    console.log(e)
-  })
 
 // This .on("click") function will trigger the AJAX Call
 $("#find-book").on("click", function(event) {
@@ -51,7 +58,7 @@ addButtons();
 });
 
 //Function for displaying the book info
-$(document).on("click", ".book", alertBookName);
+$(document).on("click", ".book",  displayBookInfo);
 
 //Call the addButtons function to display the initial buttons
 addButtons();
