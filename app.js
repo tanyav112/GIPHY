@@ -1,5 +1,5 @@
 var books = [
-  "Pride and Prejudice", "Odyssey", "The Great Gatsby", "Hamlet", "Da Vinci Code", "Life of Pi", "The Help", "To Kill a Mockingird", "The Lord of the Rings", "The Handmaid's Tale"
+  "Pride and Prejudice", "Gone with the Wind", "The Great Gatsby", "Hamlet", "Da Vinci Code", "Life of Pi", "The Help", "Wuthering Heights", "The Lord of the Rings", "The Handmaid's Tale"
 ];
 
 //Function for dumping JSON data for each button into the div
@@ -12,8 +12,13 @@ function displayBookInfo() {
   $.get(url)
     .then(function (r) {
       console.log(r)
-      $("#book-view").text(JSON.stringify(r));
-
+      // $("#book-view").text(JSON.stringify(r));
+      
+      var bookDiv = $("<div class='book'>");
+      var imgOriginalUrl = r.data[0].images.original_still.url; 
+      var image = $("<img>").attr("src", imgOriginalUrl);
+     bookDiv.append(image);
+      $("#book-view").append(bookDiv);
     })
     .catch(function (e) {
       console.log(e)
