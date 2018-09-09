@@ -17,8 +17,12 @@ function displayBookInfo() {
       var bookDiv = $("<div class='book'>");
       var imgOriginalUrl = r.data[0].images.original_still.url; 
       var image = $("<img>").attr("src", imgOriginalUrl);
-     bookDiv.append(image);
+      bookDiv.append(image);
       $("#book-view").append(bookDiv);
+
+      var rating = r.data[0].rating;
+      var para =  $("<p>").text("Rating: " + rating);
+      bookDiv.append(para);
     })
     .catch(function (e) {
       console.log(e)
