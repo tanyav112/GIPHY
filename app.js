@@ -2,10 +2,11 @@ var books = [
   "Pride and Prejudice", "Gone with the Wind", "The Great Gatsby", "Hamlet", "Da Vinci Code", "Life of Pi", "The Help", "Wuthering Heights", "The Lord of the Rings", "The Handmaid's Tale"
 ];
 
+
 //Function for dumping JSON data for each button into the div
 function displayBookInfo() {
 
-  let book = $(this).attr("data-name");
+  let book = $(this).attr("data-name")
   let url = "https://api.giphy.com/v1/gifs/search?q=" + book + "&api_key=N50meNbSPQG2tP5ukDhve3Q1BjLaakTT&limit=10";
   
  
@@ -23,6 +24,7 @@ function displayBookInfo() {
      //to add the rating data with the associated gif
      var para =  $("<p>").text("Rating: " + results[i].rating);
       bookDiv.append(para);
+       
     }
     })     
     .catch(function (e) {
@@ -30,17 +32,10 @@ function displayBookInfo() {
     });
   }
 
-
-//Function to capture the book name from the data-attribute
-// function alertBookName(){
-//   var bookName = $(this).attr("data-name");
-// }
-
-
-// Function for displaying book data
+  // Function for displaying book data
   function addButtons() {
-//to prevent repeat buttons
-   $("#book-view").empty();
+    //to prevent repeat buttons
+    $("#book-view").empty();
 // Looping through the array of books
    for (var i = 0; i < books.length; i++) {
 //adding buttons for each book in the array
