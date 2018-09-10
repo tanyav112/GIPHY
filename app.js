@@ -12,18 +12,19 @@ function displayBookInfo() {
   $.get(url)
     .then(function (r) {
       console.log(r)
-      // $("#book-view").text(JSON.stringify(r));
-      
+      var results = r.data;
+      for (var i = 0; i < results.length; i++) {       
+      //to add the gif to the page  
       var bookDiv = $("<div class='book'>");
-      var imgOriginalUrl = r.data[0].images.original_still.url; 
+      var imgOriginalUrl = results[i].images.original_still.url; 
       var image = $("<img>").attr("src", imgOriginalUrl);
       bookDiv.append(image);
       $("#book-view").append(bookDiv);
-
-      var rating = r.data[0].rating;
-      var para =  $("<p>").text("Rating: " + rating);
+     //to add the rating data with the associated gif
+     var para =  $("<p>").text("Rating: " + results[i].rating);
       bookDiv.append(para);
-    })
+    }
+    })     
     .catch(function (e) {
       console.log(e)
     });
@@ -46,9 +47,9 @@ function displayBookInfo() {
    var a = $("<button>");
 // Adding a class
    a.addClass("book btn btn-primary");
-// Adding a data-attribute with a value of the movie at index i
+// Adding a data-attribute with a value of the book at index i
    a.attr("data-name", books[i]);
-// Providing the button's text with a value of the movie at index i
+// Providing the button's text with a value of the book at index i
    a.text(books[i]);
  // Adding the button to the HTML
   $("#book-view").append(a);
