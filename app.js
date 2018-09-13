@@ -34,8 +34,9 @@ function displayBookInfo() {
         //to add the rating data with the associated gif
         var para = $("<p>").text("Rating: " + results[i].rating);
         bookDiv.append(para);
+        
       }
-
+      
     })
     .catch(function(e) {
       console.log(e);
@@ -64,17 +65,26 @@ function addButtons() {
 // This .on("click") function will trigger the AJAX Call
 $("#find-book").on("click", function(event) {
   event.preventDefault();
-
+  
   //grab the text from the input box
   let newBook = $("#book-input")
     .val()
     .trim();
   books.push(newBook);
   addButtons();
+  
 });
+
 
 //Function for displaying the book info
 $(document).on("click", ".book", displayBookInfo);
+$(document).ready(function () {
+  $("#find-book").click(function () {
+    /* Single line Reset function executes on click of Reset Button */
+    $("#book-form")[0].reset();
+  });
+});
+//Function for getting the gif to change states to animate on click 
 $(document).on("click", ".gif", function () {
   // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
   var state = $(this).attr("data-state");
@@ -92,3 +102,5 @@ $(document).on("click", ".gif", function () {
 
 //Call the addButtons function to display the initial buttons
 addButtons();
+
+
