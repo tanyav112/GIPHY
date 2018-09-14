@@ -21,7 +21,7 @@ function displayBookInfo() {
 
   $.get(url)
     .then(function(r) {
-      console.log(r);
+      
       var results = r.data;
       for (var i = 0; i < results.length; i++) {
         //to add the gif to the page
@@ -29,18 +29,15 @@ function displayBookInfo() {
         var imgOriginalStill = results[i].images.original_still.url;
         var imgOriginal = results[i].images.original.url;
         var image = `<img src= ${imgOriginalStill} data-still= ${imgOriginalStill} data-animate=${imgOriginal} data-state=still class=gif>`;
+        
         bookDiv.append(image);
         $("#book-view").append(bookDiv);
-        //to add the rating data with the associated gif
         var para = $("<p>").text("Rating: " + results[i].rating);
-        bookDiv.append(para);
-        
-      }
-      
+        bookDiv.append(para);               
+      }          
     })
     .catch(function(e) {
-      console.log(e);
-    });
+  });
 }
 
 // Function for displaying book data
@@ -61,8 +58,8 @@ function addButtons() {
     $("#book-view").append(a);
   }
 }
-
-// This .on("click") function will trigger the AJAX Call
+  
+// Event handler for user clicking the find-book button
 $("#find-book").on("click", function(event) {
   event.preventDefault();
   
@@ -78,9 +75,10 @@ $("#find-book").on("click", function(event) {
 
 //Function for displaying the book info
 $(document).on("click", ".book", displayBookInfo);
+
+//function to clear out book-form input after the submit button is clicked
 $(document).ready(function () {
-  $("#find-book").click(function () {
-    /* Single line Reset function executes on click of Reset Button */
+  $("#find-book").click(function () {    
     $("#book-form")[0].reset();
   });
 });
@@ -99,6 +97,7 @@ $(document).on("click", ".gif", function () {
     $(this).attr("data-state", "still");
   }
 });
+
 
 //Call the addButtons function to display the initial buttons
 addButtons();
