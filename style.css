@@ -1,0 +1,15 @@
+html {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+ button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+
+    .row {
+      display: flex;
+    }
+  
